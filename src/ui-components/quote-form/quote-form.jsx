@@ -1,5 +1,6 @@
 import React from 'react';
 import QuoteSection from '../quote-section/quote-section';
+import spellNumber from '../../entities/number-speller';
 
 export default class QuoteForm extends React.Component {
   constructor(props) {
@@ -75,7 +76,7 @@ export default class QuoteForm extends React.Component {
         <span> = </span>
         <span> {this.state.quoteTotal} </span>
       </div>
-        <b>This price quote is closed at the sum of XAF <span>{this.state.quoteTotal}</span> (Two million, two hundred thousand)</b>
+        <b>This price quote is closed at the sum of XAF <span>{this.state.quoteTotal}</span> (<span>{spellNumber(this.state.quoteTotal)}</span>)</b>
       </div>
     );
   }
