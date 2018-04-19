@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import TableState from '../../entities/table-state';
 
 export default class QuoteSection extends React.Component {
@@ -10,7 +11,7 @@ export default class QuoteSection extends React.Component {
   updateState(row, column) {
     let tempColumns = this.state.columns;
     tempColumns[column].content[row] = 
-    document.getElementById(this.props.id+column+row).textContent;
+      ReactDOM.findDOMNode(this.refs[this.props.id+column+row]).textContent;
     for(let i = 0; i < this.state.columns.total.content.length; i++) {
       tempColumns.total.content[i] = this.getRowTotal(i);
     }
@@ -54,8 +55,8 @@ export default class QuoteSection extends React.Component {
     let headerList = this.getColumnHeaderList();
     let tdList = headerList.map((title)=>
       <td key={title.toString()}
-        id={this.props.id+title+index}
         contentEditable={true}
+        ref={this.props.id+title+index}
         onInput={()=>this.updateState(index, title)}>
         {this.state.columns[title].content[index]}
       </td>);

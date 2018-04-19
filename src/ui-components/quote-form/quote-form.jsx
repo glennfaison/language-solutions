@@ -76,7 +76,11 @@ export default class QuoteForm extends React.Component {
         <span> = </span>
         <span> {this.state.quoteTotal} </span>
       </div>
-        <b>This price quote is closed at the sum of XAF <span>{this.state.quoteTotal}</span> (<span>{spellNumber(this.state.quoteTotal)}</span>)</b>
+        <b>
+          This price quote is closed at the sum of XAF 
+          <span>{this.state.quoteTotal}</span> 
+          (<span>{spellNumber(this.state.quoteTotal)}</span>)
+        </b>
       </div>
     );
   }
