@@ -1,4 +1,4 @@
-export default function TableState() {
+export default function QuoteSectionState() {
   return {
     title: "INTERPRETER'S FEE:",
     description: `Delectus quisquam hic ullam provident harum fugit libero rem dolor perferendis nihil at tempore, suscipit unde magni qui perspiciatis! Hic, corrupti neque?
@@ -35,7 +35,7 @@ export default function TableState() {
       },
       total: {
         id: 8,
-        content: [0, 0]
+        content: [70000, 70000]
       }
     },
     sectionTotal: 0,

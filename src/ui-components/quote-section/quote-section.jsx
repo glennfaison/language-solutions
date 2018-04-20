@@ -1,35 +1,54 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TableState from '../../entities/table-state';
+// import QuoteSectionState from '../../entities/table-state';
 
 export default class QuoteSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = new TableState();
+    this.state = this.props.stateProp;
     this.updateState = this.updateState.bind(this);
+  }
+  populateCells() {
+    let len = this.state.columns.total.content.length;
+    for(let row = 0; row < len; row++) {
+      for(let columnName in this.state.columns) {
+        ReactDOM.findDOMNode(this.refs[this.props.id+columnName+row])
+          .textContent = this.state.columns[columnName].content[row];
+      }
+    }
+  }
+  componentDidMount() {
+    this.populateCells();
+  }
+  componentDidUpdate() {console.log(this.state)
+    this.populateCells();
   }
   updateState(row, column) {
     let tempColumns = this.state.columns;
-    tempColumns[column].content[row] = 
-      ReactDOM.findDOMNode(this.refs[this.props.id+column+row]).textContent;
-    for(let i = 0; i < this.state.columns.total.content.length; i++) {
-      tempColumns.total.content[i] = this.getRowTotal(i);
+    let ref = this.props.id + column + row;
+      
+    // Set numeric value columns to Number type.
+    if(column === "time" || column === "personnel" || column === "unitPrice" || column === "total") {
+      tempColumns[column].content[row]
+        = Number(ReactDOM.findDOMNode(this.refs[ref]).textContent);
+      // Calculate row total.
+      tempColumns.total.content[row] = tempColumns.time.content[row]
+        * tempColumns.personnel.content[row]
+        * tempColumns.unitPrice.content[row];
+      // Calculate section total.
+      let sectionTotal = 0;
+      for(let i = 0; i < this.state.columns.total.content.length; i++) {
+        sectionTotal += this.state.columns.total.content[i];
+      }
+      this.setState({columns: tempColumns, sectionTotal: sectionTotal});
+      // Inform parent page of the change.
+      this.props.getSectionTotalProp(this.state.id, sectionTotal);
     }
-    this.setState({columns: tempColumns, sectionTotal: this.getSectionTotal()});
-  }
-  getSectionTotal() {
-    let sectionTotal = 0;
-    for(let i = 0; i < this.state.columns.total.content.length; i++) {
-      sectionTotal += this.state.columns.total.content[i];
+    else {
+      tempColumns[column].content[row]
+        = ReactDOM.findDOMNode(this.refs[ref]).textContent;
+      this.setState({columns: tempColumns});
     }
-    this.props.getSectionTotalProp(this.props.id, sectionTotal);
-    return sectionTotal;
-  }
-  getRowTotal(index) {
-    let total = this.state.columns.time.content[index]
-     * this.state.columns.personnel.content[index]
-     * this.state.columns.unitPrice.content[index];
-    return total;
   }
   getColumnHeaderList() {
     let headerList = [];
@@ -57,8 +76,7 @@ export default class QuoteSection extends React.Component {
       <td key={title.toString()}
         contentEditable={true}
         ref={this.props.id+title+index}
-        onInput={()=>this.updateState(index, title)}>
-        {this.state.columns[title].content[index]}
+        onBlur={()=>this.updateState(index, title)}>
       </td>);
     return(<tr key={index.toString()}>{tdList}</tr>);
   }
@@ -67,7 +85,7 @@ export default class QuoteSection extends React.Component {
     return(
       <tr className="bg-secondary">
         <td colSpan={numberOfColumns - 1}>TOTAL</td>
-        <td id={"sectionTotal" + this.props.id}>{this.state.sectionTotal}</td>
+        <td ref={"sectionTotal" + this.props.id}>{this.state.sectionTotal}</td>
       </tr>
     );
   }
