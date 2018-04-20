@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import QuoteSectionState from '../../entities/table-state';
+// import QuoteSectionState from '../../entities/quote-section-state';
 
 export default class QuoteSection extends React.Component {
   constructor(props) {

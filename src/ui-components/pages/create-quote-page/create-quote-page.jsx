@@ -1,5 +1,5 @@
 import React from 'react';
-import QuoteSectionState from '../../../entities/table-state';
+import QuoteSectionState from '../../../entities/quote-section-state';
 import spellNumber from '../../../entities/number-speller';
 import QuoteSection from '../../quote-section/quote-section';
 import PageHeader from '../../page-header/page-header';
