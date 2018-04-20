@@ -48,7 +48,7 @@ function spellThreeDigits(number) {
   if(number < 100) { return spellTwoDigits(number); }
 
   let hundred = toInteger(number / 100);
-  let ten = toInteger(number % 10);
+  let ten = toInteger(number % 100);
 
   let spelling = global.digitsAndTeens[hundred] + " " + global.tenSquared;
   if(ten === 0) {return spelling;}

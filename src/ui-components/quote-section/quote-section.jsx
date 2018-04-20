@@ -8,6 +8,16 @@ export default class QuoteSection extends React.Component {
     this.state = this.props.stateProp;
     this.updateState = this.updateState.bind(this);
   }
+  englishify(camelCaseText) {
+    let returnValue = camelCaseText[0].toUpperCase();
+    for(let i = 1; i < camelCaseText.length; i++) {
+      if(camelCaseText[i] === camelCaseText[i].toUpperCase()) {
+        returnValue += " ";
+      }
+      returnValue += camelCaseText[i];
+    }
+    return returnValue;
+  }
   populateCells() {
     let len = this.state.columns.total.content.length;
     for(let row = 0; row < len; row++) {
@@ -62,7 +72,7 @@ export default class QuoteSection extends React.Component {
     let headerList = this.getColumnHeaderList();
     let thList = headerList.map((title)=>
       <th key={this.state.columns[title].id} className="position-relative">
-        {title}
+        {this.englishify(title)}
         <button 
           className="btn bg-white btn-sm add small">
           +
