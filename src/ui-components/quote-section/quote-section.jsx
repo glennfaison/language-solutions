@@ -7,6 +7,8 @@ export default class QuoteSection extends React.Component {
     super(props);
     this.state = this.props.stateProp;
     this.updateState = this.updateState.bind(this);
+    this.removeThisSection = this.removeThisSection.bind(this);
+    this.addRow = this.addRow.bind(this);
   }
   englishify(camelCaseText) {
     let returnValue = camelCaseText[0].toUpperCase();
@@ -30,8 +32,14 @@ export default class QuoteSection extends React.Component {
   componentDidMount() {
     this.populateCells();
   }
-  componentDidUpdate() {console.log(this.state)
+  componentDidUpdate() {
     this.populateCells();
+  }
+  removeThisSection() {
+    this.props.onDeleteProp(this.state.id);
+  }
+  addRow() {
+    this.props.addSectionRowProp(this.state.id);
   }
   updateState(row, column) {
     let tempColumns = this.state.columns;
@@ -122,6 +130,24 @@ export default class QuoteSection extends React.Component {
             {this.renderLastRow()}
           </tbody>
         </table>
+        
+        <div className="dropdown">
+          <button className="btn btn-sm my-0 py-0"
+            type="button" id={"dropdown" + this.state.id}
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+                <b>. . .</b>
+          </button>
+          <div className="dropdown-menu" aria-labelledby={"dropdown" + this.state.id}>
+            <a className="dropdown-item">Action</a>
+            <a className="dropdown-item disabled">Delete row</a>
+            <a className="dropdown-item" onClick={this.addRow}>Add new row</a>
+            <div className="dropdown-divider"></div>
+            <a className="dropdown-item" onClick={this.removeThisSection}>Delete this section</a>
+          </div>
+        </div>
+
       </div>
     );
   }

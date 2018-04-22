@@ -88,13 +88,13 @@ export default class QuoteForm extends React.Component {
     return(
       <div className="quote-form mt-5">
         <div className="identification clearfix">
-          <pre className="float-right">
+          <div className="float-right">
             <span className="underline">QUOTE:</span> {this.getQuoteId()}<br/>
             <span className="underline">DATE:</span> {this.state.date.toDateString()}<br/>
-          </pre>
+          </div>
         </div>
         <div className="addressee clearfix">
-          <pre className="float-left text-left">
+          <div className="float-left text-left">
             <span className="underline">TO:</span> {this.state.addressee}<br/>
             <span className="underline">Event:</span> {this.state.event}<br/>
             <span className="underline">Venue:</span> {this.state.venue}<br/>
@@ -104,7 +104,7 @@ export default class QuoteForm extends React.Component {
             <span className="underline">Team of Interpreters:</span> {this.state.teamOfInterpreters}<br/>
             <span className="underline">Team of Sound Engineers:</span> {this.state.teamOfSoundEngineers}<br/>
             <span className="underline">Currency Used:</span> {this.state.currencyUsed}
-          </pre>
+          </div>
         </div>
 
         {this.renderSections()}

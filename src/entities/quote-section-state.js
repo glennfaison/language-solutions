@@ -19,7 +19,7 @@ export default function QuoteSectionState() {
       },
       time: {
         id: 4,
-        content: [2, 2]
+        content: [3, 2]
       },
       personnelUnit: {
         id: 5,
@@ -38,6 +38,6 @@ export default function QuoteSectionState() {
         content: [70000, 70000]
       }
     },
-    sectionTotal: 0,
+    sectionTotal: 140000,
   };
 }

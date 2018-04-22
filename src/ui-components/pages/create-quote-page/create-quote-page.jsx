@@ -34,13 +34,16 @@ export default class QuoteCreationPage extends React.Component {
       sections: {
         section1: QuoteSectionState(),
       },
-      quoteTotal: 0,
+      quoteTotal: 140000,
       
       first: "TOTAL 1",
       second: "",
     };
 
     this.getSectionTotal = this.getSectionTotal.bind(this);
+    this.removeSection = this.removeSection.bind(this);
+    this.addSectionRow = this.addSectionRow.bind(this);
+    this.removeSectionRow = this.removeSectionRow.bind(this);
   }
   getQuoteId() {
     return "LS_" + this.state.addresseeAbbreviation + "_"
@@ -60,6 +63,24 @@ export default class QuoteCreationPage extends React.Component {
   removeSection(id) {
     let tempSections = this.state.sections;
     delete tempSections["section" + id];
+    this.setState({sections: tempSections});
+  }
+  addSectionRow(sectionId) {
+    let tempSections = this.state.sections;
+    let content;
+    for(let columnName in tempSections["section" + sectionId].columns) {
+      content = tempSections["section" + sectionId].columns[columnName].content;
+      tempSections["section" + sectionId].columns[columnName].content.push(
+        content[content.length - 1]
+      );
+    }
+    this.setState({sections: tempSections});
+  }
+  removeSectionRow(sectionId, rowIndex) {
+    let tempSections = this.state.sections;
+    for(let columnName in tempSections.columns) {
+      delete tempSections["section" + sectionId].columns[columnName].content[rowIndex];
+    }
     this.setState({sections: tempSections});
   }
   getQuoteTotal() {
@@ -103,7 +124,7 @@ export default class QuoteCreationPage extends React.Component {
         <b>
           This price quote is closed at the sum of XAF 
           <span> {this.state.quoteTotal} </span> 
-          (<span className="text-capitalize"> {spellNumber(this.state.quoteTotal)}</span>)
+          (<span className="text-capitalize"> {spellNumber(this.state.quoteTotal)} </span>)
         </b>
       </div>
     );
@@ -117,14 +138,16 @@ export default class QuoteCreationPage extends React.Component {
         <QuoteSection key={i} 
           id={i} 
           getSectionTotalProp={this.getSectionTotal}
-          stateProp={this.state.sections[section]} />
+          addSectionRowProp={this.addSectionRow}
+          stateProp={this.state.sections[section]}
+          onDeleteProp={this.removeSection} />
       );
     }
     return quoteSectionList;
   }
   render() {
     return(
-      <div className="container bg-white">
+      <div className="container-fluid bg-white">
         <div className="pt-5">
           <div className="header offset-sm-1 col-sm-10">
             <PageHeader />
@@ -132,13 +155,13 @@ export default class QuoteCreationPage extends React.Component {
 
           <div className="quote-form mt-5">
             <div className="identification clearfix">
-              <pre className="float-right">
+              <div className="float-right">
                 <span className="underline">QUOTE:</span> {this.getQuoteId()}<br/>
                 <span className="underline">DATE:</span> {this.state.date.toDateString()}<br/>
-              </pre>
+              </div>
             </div>
             <div className="addressee clearfix">
-              <pre className="float-left text-left">
+              <div className="float-left text-left">
                 <span className="underline">TO:</span> {this.state.addressee}<br/>
                 <span className="underline">Event:</span> {this.state.event}<br/>
                 <span className="underline">Venue:</span> {this.state.venue}<br/>
@@ -148,7 +171,7 @@ export default class QuoteCreationPage extends React.Component {
                 <span className="underline">Team of Interpreters:</span> {this.state.teamOfInterpreters}<br/>
                 <span className="underline">Team of Sound Engineers:</span> {this.state.teamOfSoundEngineers}<br/>
                 <span className="underline">Currency Used:</span> {this.state.currencyUsed}
-              </pre>
+              </div>
             </div>
 
             {this.renderSections()}
@@ -165,10 +188,10 @@ export default class QuoteCreationPage extends React.Component {
 
           <div className="footer mt-5 pb-5">
             <div className="clearfix">
-              <pre className="addresser float-right">
+              <div className="addresser float-right">
                 <b>{this.state.addresserName}</b><br/>
                 {this.state.addresserInfo}<br/>
-                {this.state.addresserSignature}</pre>
+                {this.state.addresserSignature}</div>
             </div>
             <PageFooter registrationNumber={this.state.registrationNumber}
               taxPayerNumber={this.state.taxPayerNumber}
