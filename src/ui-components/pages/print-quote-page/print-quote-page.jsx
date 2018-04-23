@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import QuoteSectionState from '../../../entities/quote-section-state';
 import PrintableQuoteSection from '../../printable-quote-section/printable-quote-section';
 import spellNumber from '../../../entities/number-speller';
@@ -81,12 +80,6 @@ export default class QuotePrintPreviewPage extends React.Component {
       second: "140000 + 140000 + 140000 + 140000 + 140000 + 140000 + 140000 + 140000 + 140000",
     };
   }
-  componentDidMount() {console.log("loaded")
-    let qs = document.getElementsByClassName("quote-section");
-    for(let section in qs) {
-      console.log(qs[section].scrollHeight);
-    }
-  }
   getQuoteId() {
     return "LS_" + this.state.addresseeAbbreviation + "_"
       + this.state.date.toDateString();
@@ -123,7 +116,7 @@ export default class QuotePrintPreviewPage extends React.Component {
   }
   render() {
     return(
-      <div className="container bg-white">
+      <div className="container-fluid bg-white">
         <div className="pt-5">
           <div className="header offset-sm-1 col-sm-10">
             <PageHeader />

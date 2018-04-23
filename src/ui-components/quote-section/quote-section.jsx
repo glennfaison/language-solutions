@@ -102,8 +102,12 @@ export default class QuoteSection extends React.Component {
     let numberOfColumns = this.getColumnHeaderList().length;
     return(
       <tr className="bg-secondary">
-        <td colSpan={numberOfColumns - 1}>TOTAL</td>
-        <td ref={"sectionTotal" + this.props.id}>{this.state.sectionTotal}</td>
+        <td colSpan={numberOfColumns - 1}>
+          TOTAL
+        </td>
+        <td ref={"sectionTotal" + this.props.id}>
+          {this.state.sectionTotal}
+        </td>
       </tr>
     );
   }
@@ -137,7 +141,7 @@ export default class QuoteSection extends React.Component {
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false">
-                <b>. . .</b>
+                <b>. &nbsp;&nbsp;. &nbsp;&nbsp;.</b>
           </button>
           <div className="dropdown-menu" aria-labelledby={"dropdown" + this.state.id}>
             <a className="dropdown-item">Action</a>
