@@ -1,6 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class UserProfilePage extends React.Component{
+
+class UserProfilePage extends React.Component{
   render(){
     return(
       <div className="container-fluid">
@@ -88,3 +90,5 @@ export default class UserProfilePage extends React.Component{
     );
   }
 }
+
+export default withRouter(UserProfilePage);

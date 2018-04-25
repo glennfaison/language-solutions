@@ -4,8 +4,9 @@ import spellNumber from '../../../entities/number-speller';
 import QuoteSection from '../../quote-section/quote-section';
 import PageHeader from '../../page-header/page-header';
 import PageFooter from '../../page-footer/page-footer';
+import { withRouter } from 'react-router-dom';
 
-export default class QuoteCreationPage extends React.Component {
+class QuoteCreationPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -203,3 +204,5 @@ export default class QuoteCreationPage extends React.Component {
     );
   }
 }
+
+export default withRouter(QuoteCreationPage);

@@ -1,6 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class PrintPreview extends React.Component {
+
+class PrintPreview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,3 +39,5 @@ export default class PrintPreview extends React.Component {
     };
   }
 }
+
+export default withRouter(PrintPreview);

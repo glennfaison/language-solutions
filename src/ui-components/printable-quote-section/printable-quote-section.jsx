@@ -1,6 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class PrintableQuoteSection extends React.Component {
+
+class PrintableQuoteSection extends React.Component {
   englishify(camelCaseText) {
     let returnValue = camelCaseText[0].toUpperCase();
     for(let i = 1; i < camelCaseText.length; i++) {
@@ -72,3 +74,5 @@ export default class PrintableQuoteSection extends React.Component {
     );
   }
 }
+
+export default withRouter(PrintableQuoteSection);

@@ -1,6 +1,18 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
 
-export default class LoginPage extends React.Component{
+class LoginPage extends React.Component{
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+  }
+  login() {
+    let email = ReactDOM.findDOMNode(this.refs["email"]).value;
+    let password = ReactDOM.findDOMNode(this.refs["password"]).value;
+    this.props.loginProp(email, password);
+    this.props.history.push("/");
+  }
   render(){
     return(
       <div className="container-fluid">
@@ -18,29 +30,29 @@ export default class LoginPage extends React.Component{
               </p>
             </div>
             <div className="col-sm-4">
-              <form className="col-sm-12 p-3 mt-3 card">
+              <div className="col-sm-12 p-3 mt-3 card">
                 <div className="form-group row">
-                  <label htmlFor="username" className="col-sm-12 col-form-label">Username</label>
+                  <label htmlFor="email" className="col-sm-12 col-form-label">Email</label>
                   <div className="col-sm-12">
-                    <input type="text" className="form-control" name="username" id="username" placeholder=""/>
+                    <input type="email" className="form-control" name="email" ref="email" placeholder=""/>
                   </div>
                 </div>
                 <div className="form-group row">
                   <label htmlFor="password" className="col-sm-12 col-form-label">Password</label>
                   <div className="col-sm-12">
-                    <input type="text" className="form-control" name="password" id="password"/>
+                    <input type="password" className="form-control" name="password" ref="password"/>
                   </div>
                 </div>
                 <div className="form-group row">
                   <div className="col-sm-12 mt-3">
-                    <button type="submit" className="btn btn-success btn-block">Login</button>
+                    <button type="submit" onClick={this.login} className="btn btn-success btn-block">Login</button>
                   </div>
                 </div>
                 <small className="text-center">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                   est delectus deserunt, natus ab?
                 </small>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -48,3 +60,5 @@ export default class LoginPage extends React.Component{
     );
   }
 }
+
+export default withRouter(LoginPage);

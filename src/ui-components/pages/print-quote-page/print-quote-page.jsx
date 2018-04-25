@@ -4,8 +4,10 @@ import PrintableQuoteSection from '../../printable-quote-section/printable-quote
 import spellNumber from '../../../entities/number-speller';
 import PageHeader from '../../page-header/page-header';
 import PageFooter from '../../page-footer/page-footer';
+import { withRouter } from 'react-router-dom';
 
-export default class QuotePrintPreviewPage extends React.Component {
+
+class QuotePrintPreviewPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -165,3 +167,5 @@ export default class QuotePrintPreviewPage extends React.Component {
     );
   }
 }
+
+export default withRouter(QuotePrintPreviewPage);
