@@ -1,0 +1,11 @@
+export default class Settings {
+  static baseRoutes = {
+    "root": "/",
+    "userProfile": "/profile",
+    "login": "/login",
+    "signup": "/signup",
+    "createQuote": "/create-quote",
+    "printPreview": "/print-preview",
+    "error": "/error",
+  };
+}

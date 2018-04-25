@@ -7,37 +7,37 @@ export default function QuoteSectionState() {
     columns: {
       event: {
         id: 1,
-        content: ["Interpreter's Conference", "Interpreter's Conference"]
+        content: ["Interpreter's Conference",]
       },
       venue: {
         id: 2,
-        content: ["DLM, wherever that is", "DLM, wherever that is"]
+        content: ["DLM, wherever that is",]
       },
       timeUnit: {
         id: 3,
-        content: ["day", "day"]
+        content: ["day",]
       },
       time: {
         id: 4,
-        content: [3, 2]
+        content: [3,]
       },
       personnelUnit: {
         id: 5,
-        content: ["Interpreter", "Interpreter"]
+        content: ["Interpreter",]
       },
       personnel: {
         id: 6,
-        content: [1, 1]
+        content: [1,]
       },
       unitPrice: {
         id: 7,
-        content: [350000, 350000]
+        content: [350000,]
       },
       total: {
         id: 8,
-        content: [70000, 70000]
+        content: [1050000,]
       }
     },
-    sectionTotal: 140000,
+    sectionTotal: 1050000,
   };
 }

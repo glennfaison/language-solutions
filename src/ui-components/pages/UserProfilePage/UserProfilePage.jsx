@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import Settings from '../../../entities/Settings';
 
 
 class UserProfilePage extends React.Component{
@@ -28,7 +29,7 @@ class UserProfilePage extends React.Component{
                   </div>
                   <div className="small">
                     <i className="fa fa-chain" aria-hidden="true"></i>
-                    <Link to="/create-quote" >Creat Quote</Link>
+                    <Link to={Settings.baseRoutes.createQuote} >Creat Quote</Link>
                   </div>
                   <hr/>
                   <p className="pt-3 text-secondary">

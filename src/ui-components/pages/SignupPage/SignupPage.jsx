@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import User from '../../../entities/User';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import Settings from '../../../entities/Settings';
 
 
 class SignupPagePage extends React.Component{
   constructor(props) {
     super(props);
-    this.SignupPageButtonClick = this.SignupPageButtonClick.bind(this);
+    this.signupButtonClick = this.signupButtonClick.bind(this);
   }
-  SignupPageButtonClick() {
+  signupButtonClick() {
     let username = ReactDOM.findDOMNode(this.refs["username"]).value;
     let email = ReactDOM.findDOMNode(this.refs["email"]).value;
     let password = ReactDOM.findDOMNode(this.refs["password"]).value;
     let newUser = new User(username, email, password);
     this.props.onSignup(newUser);
-    this.props.history.push("/login");
+    this.props.history.push(Settings.baseRoutes.login);
   }
   render(){
     return(
@@ -57,9 +58,13 @@ class SignupPagePage extends React.Component{
                   <div className="col-sm-12 mt-3">
                     <button type="submit"
                       className="btn btn-success btn-block"
-                      onClick={this.SignupPageButtonClick} >Sign Up</button>
+                      onClick={this.signupButtonClick} >Sign Up</button>
                   </div>
                 </div>
+                <small className="text-center">
+                  <hr /> Already have an account? <br />
+                  <Link to={Settings.baseRoutes.login}>Log In</Link>
+                </small>
               </div>
             </div>
           </div>

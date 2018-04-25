@@ -8,6 +8,7 @@ import SignupPagePage from './pages/SignupPage/SignupPage';
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 import User from '../entities/User';
 import RedirectionPage from './pages/RedirectionPage/RedirectionPage';
+import Settings from '../entities/Settings';
 
 
 class App extends React.Component {
@@ -19,10 +20,9 @@ class App extends React.Component {
         admin: new User("admin", "admin", "admin"),
       }
     };
-    this.SignupPage = this.signup.bind(this);
+    this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.redirectTo = this.redirectTo.bind(this);
   }
   signup(newUser) {
     let tempRegisteredUsers = this.state.registeredUsers;
@@ -38,17 +38,14 @@ class App extends React.Component {
   logout() {
     this.setState({currentUser: null});
   }
-  redirectTo(pathname, history) {
-    history.replace(pathname);
-  }
   render() {
     if(!this.state.currentUser) {
       return(
         <Router style={{display: 'none !important'}} >
           <Switch >
-            <SignupPagePage exact={true} path="/signup" onSignup={this.signup} />
-            <LoginPage exact={true} path="/login" onLogin={this.login} />
-            <RedirectionPage exact={false} path="/" redirectPath="/login" />
+            <SignupPagePage exact={true} path={Settings.baseRoutes.signup} onSignup={this.signup} />
+            <LoginPage exact={true} path={Settings.baseRoutes.login} onLogin={this.login} />
+            <RedirectionPage exact={false} path={Settings.baseRoutes.root} redirectPath={Settings.baseRoutes.login} />
           </Switch>
         </Router>
       );
@@ -57,12 +54,12 @@ class App extends React.Component {
       return (
         <Router style={{display: 'none !important'}} >
           <Switch >
-            <RedirectionPage exact={true} path="/" redirectPath="/profile" currentUser={this.state.currentUser} />
-            <UserProfilePage exact={true} path="/profile" onLogout={this.logout} currentUser={this.state.currentUser} />
-            <QuoteCreationPage exact={true} path="/create-quote" onLogout={this.logout} currentUser={this.state.currentUser} />
-            <QuotePrintPreviewPage exact={true} path="/print-preview" onLogout={this.logout} currentUser={this.state.currentUser} />
-            <ErrorPage exact={true} path="/error" onLogout={this.logout} currentUser={this.state.currentUser} />
-            <RedirectionPage exact={false} path="/" redirectPath="/error" currentUser={this.state.currentUser} />
+            <RedirectionPage exact={true} path={Settings.baseRoutes.root} redirectPath={Settings.baseRoutes.userProfile} currentUser={this.state.currentUser} />
+            <UserProfilePage exact={true} path={Settings.baseRoutes.userProfile} onLogout={this.logout} currentUser={this.state.currentUser} />
+            <QuoteCreationPage exact={true} path={Settings.baseRoutes.createQuote} onLogout={this.logout} currentUser={this.state.currentUser} />
+            <QuotePrintPreviewPage exact={true} path={Settings.baseRoutes.printPreview} onLogout={this.logout} currentUser={this.state.currentUser} />
+            <ErrorPage exact={true} path={Settings.baseRoutes.error} onLogout={this.logout} currentUser={this.state.currentUser} />
+            <RedirectionPage exact={false} path={Settings.baseRoutes.root} redirectPath={Settings.baseRoutes.error} currentUser={this.state.currentUser} />
           </Switch>
         </Router>
       );

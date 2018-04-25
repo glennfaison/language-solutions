@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import Settings from '../../../entities/Settings';
+
 
 class LoginPage extends React.Component{
   constructor(props) {
@@ -11,7 +13,7 @@ class LoginPage extends React.Component{
     let email = ReactDOM.findDOMNode(this.refs["email"]).value;
     let password = ReactDOM.findDOMNode(this.refs["password"]).value;
     this.props.onLogin(email, password);
-    this.props.history.push("/");
+    this.props.history.push(Settings.baseRoutes.root);
   }
   render(){
     return(
@@ -49,8 +51,8 @@ class LoginPage extends React.Component{
                   </div>
                 </div>
                 <small className="text-center">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  est delectus deserunt, natus ab?
+                  <hr /> Don't have an account yet? <br />
+                  <Link to={Settings.baseRoutes.signup}>Sign Up</Link>
                 </small>
               </div>
             </div>
