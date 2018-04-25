@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
-import QuoteCreationPage from '../ui-components/pages/create-quote-page/create-quote-page';
-import QuotePrintPreviewPage from '../ui-components/pages/print-quote-page/print-quote-page';
-import ErrorPage from '../ui-components/pages/error-page/error-page';
-import LoginPage from './pages/login/login';
-import SignUpPage from './pages/signup/signup';
-import UserProfilePage from './pages/user-profile/user-profile';
+import QuoteCreationPage from '../ui-components/pages/QuoteCreationPage/QuoteCreationPage';
+import QuotePrintPreviewPage from '../ui-components/pages/QuotePrintPreviewPage/QuotePrintPreviewPage';
+import ErrorPage from '../ui-components/pages/ErrorPage/ErrorPage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import SignupPagePage from './pages/SignupPage/SignupPage';
+import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 import User from '../entities/User';
 import RedirectionPage from './pages/RedirectionPage/RedirectionPage';
 
@@ -19,7 +19,7 @@ class App extends React.Component {
         admin: new User("admin", "admin", "admin"),
       }
     };
-    this.signup = this.signup.bind(this);
+    this.SignupPage = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.redirectTo = this.redirectTo.bind(this);
@@ -46,8 +46,8 @@ class App extends React.Component {
       return(
         <Router style={{display: 'none !important'}} >
           <Switch >
-            <SignUpPage exact={true} path="/signup" signupProp={this.signup} />
-            <LoginPage exact={true} path="/login" loginProp={this.login} />
+            <SignupPagePage exact={true} path="/signup" onSignup={this.signup} />
+            <LoginPage exact={true} path="/login" onLogin={this.login} />
             <RedirectionPage exact={false} path="/" redirectPath="/login" />
           </Switch>
         </Router>
@@ -57,12 +57,12 @@ class App extends React.Component {
       return (
         <Router style={{display: 'none !important'}} >
           <Switch >
-            <RedirectionPage exact={true} path="/" redirectPath="/profile" />
-            <UserProfilePage exact={true} path="/profile" onLogout={this.logout} />
-            <QuoteCreationPage exact={true} path="/create-quote" onLogout={this.logout} />
-            <QuotePrintPreviewPage exact={true} path="/print-preview" onLogout={this.logout} />
-            <ErrorPage exact={true} path="/error" onLogout={this.logout} />
-            <RedirectionPage exact={false} path="/" redirectPath="/error" />
+            <RedirectionPage exact={true} path="/" redirectPath="/profile" currentUser={this.state.currentUser} />
+            <UserProfilePage exact={true} path="/profile" onLogout={this.logout} currentUser={this.state.currentUser} />
+            <QuoteCreationPage exact={true} path="/create-quote" onLogout={this.logout} currentUser={this.state.currentUser} />
+            <QuotePrintPreviewPage exact={true} path="/print-preview" onLogout={this.logout} currentUser={this.state.currentUser} />
+            <ErrorPage exact={true} path="/error" onLogout={this.logout} currentUser={this.state.currentUser} />
+            <RedirectionPage exact={false} path="/" redirectPath="/error" currentUser={this.state.currentUser} />
           </Switch>
         </Router>
       );

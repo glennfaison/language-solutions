@@ -58,7 +58,7 @@ class PrintableQuoteSection extends React.Component {
   }
   render() {
     return(
-      <div className="quote-section mt-5">
+      <div className="QuoteSection mt-5">
         <h4 style={{"fontWeight": 1200}} className="text-center"><b>{this.props.stateProp.title}</b></h4>
         <span>{this.props.stateProp.description}</span>
         <table className="table table-bordered mt-3">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 
 class UserProfilePage extends React.Component{
@@ -16,11 +16,11 @@ class UserProfilePage extends React.Component{
               </div>
               <div className="row">
                 <div className="col-sm-12 pt-3">
-                  <h3>glennfaison</h3>
+                  <h3>{this.props.currentUser.username}</h3>
                   <hr/>
                   <div className="small">
                     <i className="fa fa-envelope-o" aria-hidden="true"></i>
-                    <a href="">glennfaison@gmail.com</a>
+                    <a href="">{this.props.currentUser.email}</a>
                   </div>
                   <div className="small">
                     <i className="fa fa-home" aria-hidden="true"></i>
@@ -28,7 +28,7 @@ class UserProfilePage extends React.Component{
                   </div>
                   <div className="small">
                     <i className="fa fa-chain" aria-hidden="true"></i>
-                    <a href="">https://horarium.com/glennfaison</a>
+                    <Link to="/create-quote" >Creat Quote</Link>
                   </div>
                   <hr/>
                   <p className="pt-3 text-secondary">

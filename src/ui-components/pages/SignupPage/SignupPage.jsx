@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import User from '../../../entities/User';
 import { withRouter } from 'react-router-dom';
 
-class LoginPage extends React.Component{
+
+class SignupPagePage extends React.Component{
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
+    this.SignupPageButtonClick = this.SignupPageButtonClick.bind(this);
   }
-  login() {
+  SignupPageButtonClick() {
+    let username = ReactDOM.findDOMNode(this.refs["username"]).value;
     let email = ReactDOM.findDOMNode(this.refs["email"]).value;
     let password = ReactDOM.findDOMNode(this.refs["password"]).value;
-    this.props.loginProp(email, password);
-    this.props.history.push("/");
+    let newUser = new User(username, email, password);
+    this.props.onSignup(newUser);
+    this.props.history.push("/login");
   }
   render(){
     return(
@@ -34,7 +38,13 @@ class LoginPage extends React.Component{
                 <div className="form-group row">
                   <label htmlFor="email" className="col-sm-12 col-form-label">Email</label>
                   <div className="col-sm-12">
-                    <input type="email" className="form-control" name="email" ref="email" placeholder=""/>
+                    <input type="text" className="form-control" name="email" ref="email" placeholder=""/>
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label htmlFor="username" className="col-sm-12 col-form-label">Username</label>
+                  <div className="col-sm-12">
+                    <input type="text" className="form-control" name="username" ref="username" placeholder=""/>
                   </div>
                 </div>
                 <div className="form-group row">
@@ -45,13 +55,11 @@ class LoginPage extends React.Component{
                 </div>
                 <div className="form-group row">
                   <div className="col-sm-12 mt-3">
-                    <button type="submit" onClick={this.login} className="btn btn-success btn-block">Login</button>
+                    <button type="submit"
+                      className="btn btn-success btn-block"
+                      onClick={this.SignupPageButtonClick} >Sign Up</button>
                   </div>
                 </div>
-                <small className="text-center">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  est delectus deserunt, natus ab?
-                </small>
               </div>
             </div>
           </div>
@@ -61,4 +69,4 @@ class LoginPage extends React.Component{
   }
 }
 
-export default withRouter(LoginPage);
+export default withRouter(SignupPagePage);

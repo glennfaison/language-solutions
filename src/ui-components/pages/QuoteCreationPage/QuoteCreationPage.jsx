@@ -1,9 +1,9 @@
 import React from 'react';
-import QuoteSectionState from '../../../entities/quote-section-state';
-import spellNumber from '../../../entities/number-speller';
-import QuoteSection from '../../quote-section/quote-section';
-import PageHeader from '../../page-header/page-header';
-import PageFooter from '../../page-footer/page-footer';
+import QuoteSectionState from '../../../entities/QuoteSectionState';
+import spellNumber from '../../../entities/spellNumber';
+import QuoteSection from '../../QuoteSection/QuoteSection';
+import PageHeader from '../../QuoteHeader/QuoteHeader';
+import PageFooter from '../../QuoteFooter/QuoteFooter';
 import { withRouter } from 'react-router-dom';
 
 class QuoteCreationPage extends React.Component {
@@ -139,9 +139,9 @@ class QuoteCreationPage extends React.Component {
         <QuoteSection key={i} 
           id={i} 
           getSectionTotalProp={this.getSectionTotal}
-          addSectionRowProp={this.addSectionRow}
+          onAddSectionRow={this.addSectionRow}
           stateProp={this.state.sections[section]}
-          onDeleteProp={this.removeSection} />
+          onDelete={this.removeSection} />
       );
     }
     return quoteSectionList;

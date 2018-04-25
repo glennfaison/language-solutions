@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './error-page.css';
+import './ErrorPage.css';
 import { withRouter } from 'react-router-dom';
 
 

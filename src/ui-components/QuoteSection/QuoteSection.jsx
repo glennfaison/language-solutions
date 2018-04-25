@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import QuoteSectionState from '../../entities/quote-section-state';
 
 export default class QuoteSection extends React.Component {
   constructor(props) {
@@ -36,10 +35,10 @@ export default class QuoteSection extends React.Component {
     this.populateCells();
   }
   removeThisSection() {
-    this.props.onDeleteProp(this.state.id);
+    this.props.onDelete(this.state.id);
   }
   addRow() {
-    this.props.addSectionRowProp(this.state.id);
+    this.props.onAddSectionRow(this.state.id);
   }
   updateState(row, column) {
     let tempColumns = this.state.columns;
@@ -122,7 +121,7 @@ export default class QuoteSection extends React.Component {
   }
   render() {
     return(
-      <div className="quote-section mt-5">
+      <div className="QuoteSection mt-5">
         <h4 style={{"fontWeight": 1200}} className="text-center"><b>{this.state.title}</b></h4>
         <span>{this.state.description}</span>
         <table className="table table-bordered mt-3">
