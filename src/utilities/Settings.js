@@ -8,4 +8,9 @@ export default class Settings {
     "printPreview": "/print-preview",
     "error": "/error",
   };
+  static signals = {
+    "signup": "signup",
+    "login": "login",
+    "logout": "logout",
+  };
 }

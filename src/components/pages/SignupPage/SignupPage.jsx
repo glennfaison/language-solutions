@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import User from '../../../utilities/User';
 import { withRouter, Link } from 'react-router-dom';
 import Settings from '../../../utilities/Settings';
-
+import SignalManager from '../../../utilities/SignalManager';
 
 class SignupPagePage extends React.Component{
   constructor(props) {
@@ -15,7 +15,7 @@ class SignupPagePage extends React.Component{
     let email = ReactDOM.findDOMNode(this.refs["email"]).value;
     let password = ReactDOM.findDOMNode(this.refs["password"]).value;
     let newUser = new User(username, email, password);
-    this.props.onSignup(newUser);
+    SignalManager.emitSignal(Settings.signals.signup, newUser);
     this.props.history.push(Settings.baseRoutes.login);
   }
   render(){

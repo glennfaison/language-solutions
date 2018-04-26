@@ -7,7 +7,7 @@ class SignalManager {
   };
   static emitSignal = function (event, data={}) {
     let handler = SignalManager.signalHandlers[event];
-    if(!handler && handler.length === 0) { return; }
+    if(!handler || handler.length === 0) { return; }
     for(let i = 0; i < handler.length; i++) {
       SignalManager.signalHandlers[event][i](data);
     }

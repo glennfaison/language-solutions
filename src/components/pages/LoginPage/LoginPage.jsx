@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter, Link } from 'react-router-dom';
 import Settings from '../../../utilities/Settings';
+import SignalManager from '../../../utilities/SignalManager';
 
 
 class LoginPage extends React.Component{
@@ -12,7 +13,7 @@ class LoginPage extends React.Component{
   login() {
     let email = ReactDOM.findDOMNode(this.refs["email"]).value;
     let password = ReactDOM.findDOMNode(this.refs["password"]).value;
-    this.props.onLogin(email, password);
+    SignalManager.emitSignal(Settings.signals.login, {email, password});
     this.props.history.push(Settings.baseRoutes.root);
   }
   render(){
