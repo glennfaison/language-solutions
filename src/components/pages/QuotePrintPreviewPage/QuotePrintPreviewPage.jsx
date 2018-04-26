@@ -1,7 +1,7 @@
 import React from 'react';
-import QuoteSectionState from '../../../entities/QuoteSectionState';
+import QuoteSectionState from '../../../utilities/QuoteSectionState';
 import PrintableQuoteSection from '../../PrintableQuoteSection/PrintableQuoteSection';
-import spellNumber from '../../../entities/spellNumber';
+import spellNumber from '../../../utilities/spellNumber';
 import PageHeader from '../../QuoteHeader/QuoteHeader';
 import PageFooter from '../../QuoteFooter/QuoteFooter';
 import { withRouter } from 'react-router-dom';

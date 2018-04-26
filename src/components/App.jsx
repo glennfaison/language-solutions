@@ -1,14 +1,15 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
-import QuoteCreationPage from '../ui-components/pages/QuoteCreationPage/QuoteCreationPage';
-import QuotePrintPreviewPage from '../ui-components/pages/QuotePrintPreviewPage/QuotePrintPreviewPage';
-import ErrorPage from '../ui-components/pages/ErrorPage/ErrorPage';
+import QuoteCreationPage from '../components/pages/QuoteCreationPage/QuoteCreationPage';
+import QuotePrintPreviewPage from '../components/pages/QuotePrintPreviewPage/QuotePrintPreviewPage';
+import ErrorPage from '../components/pages/ErrorPage/ErrorPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPagePage from './pages/SignupPage/SignupPage';
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
-import User from '../entities/User';
+import User from '../utilities/User';
 import RedirectionPage from './pages/RedirectionPage/RedirectionPage';
-import Settings from '../entities/Settings';
+import Settings from '../utilities/Settings';
+import SignalManager from '../utilities/SignalManager';
 
 
 class App extends React.Component {
@@ -23,7 +24,10 @@ class App extends React.Component {
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.printThis = this.printThis.bind(this);
+    SignalManager.listenForSignal("printThis", this.printThis);
   }
+  printThis(data) {console.log(this)}
   signup(newUser) {
     let tempRegisteredUsers = this.state.registeredUsers;
     tempRegisteredUsers[newUser.email] = newUser;

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import User from '../../../entities/User';
+import User from '../../../utilities/User';
 import { withRouter, Link } from 'react-router-dom';
-import Settings from '../../../entities/Settings';
+import Settings from '../../../utilities/Settings';
 
 
 class SignupPagePage extends React.Component{

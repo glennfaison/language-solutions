@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter, Link } from 'react-router-dom';
-import Settings from '../../../entities/Settings';
+import Settings from '../../../utilities/Settings';
 
 
 class LoginPage extends React.Component{

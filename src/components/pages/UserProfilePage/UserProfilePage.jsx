@@ -1,10 +1,12 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import Settings from '../../../entities/Settings';
+import Settings from '../../../utilities/Settings';
+import SignalManager from '../../../utilities/SignalManager';
 
 
 class UserProfilePage extends React.Component{
   render(){
+    SignalManager.emitSignal("printThis", "nothing");
     return(
       <div className="container-fluid">
         <div className="container">
