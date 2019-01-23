@@ -1,0 +1,57 @@
+.InputContainer * {
+  display: none;
+}
+/*/////////////////////*/
+.InputContainer{
+  outline: transparent;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  --padding: 5px;
+  /* width: 200px;
+  height: 25px; */
+}
+.InputContainer > input:first-of-type,
+.InputContainer > textarea:first-of-type,
+.InputContainer > select:first-of-type {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: var(--padding);
+}
+.floating-label:first-of-type {
+  display: flex;
+  position: absolute;
+  width: calc(100% - (2 * var(--padding)));
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  transition: 0.2s ease all;
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  align-items: center;
+  color: var(--secondary);
+  text-align: left;
+}
+.InputContainer > textarea ~ .floating-label {
+  display: flex;
+  align-self: flex-start;
+  align-items: baseline;
+}
+.floating-label.float,
+.InputContainer:disabled > .floating-label,
+.InputContainer:focus-within > .floating-label {
+  top: -100%;
+  left: calc(var(--padding) * -1);
+  font-size: 66.6667%;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.InputContainer > input:not(:placeholder-shown):invalid ~ .floating-label{
+  color: red;
+}
+.InputContainer > input:not(:placeholder-shown):valid ~ .floating-label{
+  color: green;
+}

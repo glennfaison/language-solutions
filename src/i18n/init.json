@@ -1,0 +1,48 @@
+{
+  "resources": {
+    "en": {
+      "src": {
+        "Name": "Name",
+        "First Name": "First Name",
+        "Last Name": "Last Name",
+        "Last Names": "Last Names",
+        "Email": "Email",
+        "Password": "Password",
+        "Repeat Password": "Repeat Password",
+        "Location": "Location",
+        "Date of Birth": "Date of Birth",
+        "I'm not a robot": "I'm not a robot",
+        "Remember me": "Remember me",
+        "Seller": "Seller",
+        "Buyer": "Buyer",
+        "Both": "Both",
+        "Sign Up": "Sign Up",
+        "Register": "Register",
+        "Log In": "Log In",
+        "Subject": "Subject",
+        "Message": "Message",
+        "Social Pages": "Social Pages",
+        "Product": "Product",
+        "Products": "Products",
+        "Contact Us": "Contact Us",
+        "Terms": "Terms",
+        "Privacy": "Privacy",
+        "Submit": "Submit",
+        "Forgot Password?": "Forgot Password?"
+      }
+    }
+  },
+  "fr": {},
+  "fallbackLng": "fr",
+  "debug": true,
+  "ns": [],
+  "defaultNS": "",
+  "keySeparator": false,
+  "interpolation": {
+    "escapeValue": false,
+    "formatSeparator": ","
+  },
+  "react": {
+    "wait": true
+  }
+}

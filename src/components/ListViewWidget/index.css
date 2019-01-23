@@ -1,0 +1,25 @@
+.listViewWidget {
+  display: flex;
+  flex-basis: 10px;
+  width: 100%;
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: stretch;
+  flex-wrap: wrap;
+}
+.listViewWidget > * {
+  width: 100%;
+}
+.listViewWidget > .header {
+  text-align: center;
+  font-weight: 900;
+  padding: 10px;
+}
+.listViewWidget > .footer {
+  display: flex;
+  padding: 10px;
+  justify-content: space-around;
+}
+.listViewWidget > .footer > a {
+  text-decoration: none;
+}

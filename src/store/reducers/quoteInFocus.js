@@ -1,0 +1,79 @@
+import {
+  ActionTypes,
+  copyQuote,
+  newQuoteSection,
+  copyQuoteSection,
+  copyQuoteSectionItem
+} from "../../constants";
+
+const DefaultState = {
+  waiting: false,
+  data: null
+};
+
+const quoteInFocus = (state = DefaultState, action) => {
+  let type = action.type || undefined;
+  let sectionIndex, sectionItemIndex, section, sectionItem, newQuote;
+  switch (type) {
+    case ActionTypes.GetNewQuote:
+      return { waiting: false, data: newQuote() };
+
+
+
+    case ActionTypes.AddQuoteSection:
+      newQuote = copyQuote(state);
+      newQuote.quoteSections.push(newQuoteSection());
+      return { waiting: false, data: newQuote };
+
+
+
+    case ActionTypes.RemoveQuoteSection:
+      newQuote = copyQuote(state);
+      sectionIndex = action.payload.sectionIndex;
+      newQuote.quoteSections.splice(sectionIndex, 1);
+      return { waiting: false, data: newQuote };
+
+
+
+    case ActionTypes.SetQuoteSection:
+      newQuote = copyQuote(state);
+      sectionIndex = action.payload.sectionIndex;
+      section = action.payload.section;
+      newQuote.quoteSections[sectionIndex] = copyQuoteSection(section);
+      return { waiting: false, data: newQuote };
+
+
+
+    case ActionTypes.AddQuoteSectionItem:
+      newQuote = copyQuote(state);
+      sectionIndex = action.payload.sectionIndex;
+      newQuote.quoteSections[sectionIndex].items.push(newQuoteSection());
+      return { waiting: false, data: newQuote };
+
+
+
+    case ActionTypes.RemoveQuoteSectionItem:
+      newQuote = copyQuote(state);
+      sectionIndex = action.payload.sectionIndex;
+      sectionItemIndex = action.payload.sectionItemIndex;
+      newQuote.quoteSections[sectionIndex].items.splice(sectionItemIndex, 1);
+      return { waiting: false, data: newQuote };
+
+
+
+    case ActionTypes.SetQuoteSectionItem:
+      newQuote = copyQuote(state);
+      sectionIndex = action.payload.sectionIndex;
+      sectionItemIndex = action.payload.sectionItemIndex;
+      sectionItem = action.payload.sectionItem;
+      newQuote.quoteSections[sectionIndex].items.push(copyQuoteSectionItem(sectionItem));
+      return { waiting: false, data: newQuote };
+
+
+
+    default:
+      return state;
+  }
+};
+
+export default quoteInFocus;

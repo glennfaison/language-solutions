@@ -1,0 +1,15 @@
+{
+  "firstName": "Surnom",
+  "lastName": "Nom",
+  "email": "Email",
+  "password": "Mot de passe",
+  "repeatPassword": "Repeter mot de passe",
+  "location": "Lieu",
+  "datOfBirth": "Date de naissance",
+  "notARobot": "Je ne suis pas un robot",
+  "rememberMe": "Se souvenir de moi",
+  "seller": "Vendeur",
+  "buyer": "Acheteur",
+  "buyerAndSeller": "Les deux",
+  "signup": "S'enregistrer"
+}
