@@ -1,13 +1,16 @@
 import { ActionTypes } from '../../constants';
 import { QuotesResource } from '../../httpResources';
+import { NotificationManager } from 'react-notifications';
 
-export const loadQuotesFromThisUser = userId => dispatch => {
+export const loadQuotesByAuthor = userId => dispatch => {
+  getNewQuote();
   dispatch({ type: ActionTypes.LoadQuotesByAuthorAttempt });
   QuotesResource.byAuthor(userId)
     .then(res => {
-      dispatch({ type: ActionTypes.LoadQuotesByAuthorSuccess, payload: { quoteList: res.body } });
+      dispatch({ type: ActionTypes.LoadQuotesByAuthorSuccess, payload: res.body });
     })
     .catch(err => {
+      NotificationManager.error("An Error Occurred While Loading Items")
       dispatch({ type: ActionTypes.LoadQuotesByAuthorFailure, payload: {} });
     });
 };
@@ -47,6 +50,10 @@ export const updateQuote = quote => dispatch => {
 
 export const getNewQuote = () => dispatch => {
   dispatch({ type: ActionTypes.GetNewQuote });
+};
+
+export const setQuote = quote => dispatch => {
+  dispatch({ type: ActionTypes.SetQuote, payload: { quote: quote } });
 };
 
 export const addQuoteSection = () => dispatch => {

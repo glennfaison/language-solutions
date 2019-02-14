@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 import { connect } from 'react-redux';
 
@@ -7,9 +7,11 @@ import NavBar from '../NavBar';
 import AppFooter from '../AppFooter';
 import LoginView from '../LoginView';
 import SignupView from '../SignupView';
-// import ProfileView from '../ProfileView';
-// import QuoteCreationView from '../QuoteCreationView';
+import ProfileView from '../ProfileView';
+import QuoteCreationView from '../QuoteCreationView';
 import { Routes } from '../../constants';
+
+import '../../assets/css/index.css';
 
 class AppSkeleton extends React.Component {
   render() {
@@ -26,22 +28,24 @@ class AppSkeleton extends React.Component {
 
         <div className="container-fluid">
           <section className="row">
-            <Switch>
-              <Route exact path={Routes.login} component={LoginView} />
-              <Route exact path={Routes.register} component={SignupView} />
               {
                 (thisUser.data === null || thisUser.data === undefined) &&
-                <Redirect to={Routes.login} />
+                <Switch>
+                  <Route exact path={Routes.login} component={LoginView} />
+                  <Route exact path={Routes.register} component={SignupView} />
+                  <Route exact={false} path={Routes.root} component={LoginView} />
+                </Switch>
               }
-              {/*
+              {
                 (thisUser.data !== null && thisUser.data !== undefined) &&
-                <React.Fragment>
-                  <ProfileView exact path={Routes.profile} />
-                  <QuoteCreationView exact path={Routes.newQuote} />
-                  <Redirect to={Routes.NotFound} />
-                </React.Fragment>
-              */}
-            </Switch>
+                <Switch>
+                  <Route exact path={Routes.login} component={LoginView} />
+                  <Route exact path={Routes.register} component={SignupView} />
+                  <Route exact path={Routes.profile} component={ProfileView} />
+                  <Route exact path={Routes.newQuote} component={QuoteCreationView} />
+                  <Route exact={false} path={Routes.root} component={LoginView} />
+                </Switch>
+              }
           </section>
         </div>
 
@@ -54,13 +58,10 @@ class AppSkeleton extends React.Component {
   }
 }
 
-const mapStateToProps = ({ router, thisUser }) => ({
+const mapStateToProps = ({ router, thisUser, thisUserProfile }) => ({
   router,
-  thisUser
+  thisUser,
+  thisUserProfile
 });
 
-const mapDispatchToProps = (dispatch) => ({ dispatch });
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppSkeleton);
+export default connect(mapStateToProps, null)(AppSkeleton);

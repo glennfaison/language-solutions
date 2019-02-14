@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { withNamespaces } from 'react-i18next';
 
 import InputContainer from '../../../../InputContainer';
-import newQuoteSectionItem from '../../../../../constants';
+import { newQuoteSectionItem } from '../../../../../constants';
 
 class QuoteSectionItem extends React.Component {
   constructor(props) {

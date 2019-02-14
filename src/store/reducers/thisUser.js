@@ -2,11 +2,7 @@ import { ActionTypes } from "../../constants";
 
 const DefaultState = {
   waiting: false,
-  data: {
-    email: localStorage.getItem("email"),
-    username: localStorage.getItem("username"),
-    "access-token": localStorage.getItem("access-token")
-  } || null
+  data: null
 };
 
 const thisUser = (state = DefaultState, action) => {
@@ -16,8 +12,8 @@ const thisUser = (state = DefaultState, action) => {
       return { waiting: true, data: { ...state.data } };
 
     case ActionTypes.LoginSuccess:
-      let newUser = action.payload.newUser.data;
-      newUser.link = action.payload.newUser.links.self;
+      let newUser = action.payload.data;
+      newUser.link = action.payload.links.self;
       return { waiting: false, data: { ...newUser } };
 
     case ActionTypes.LoginFailure:

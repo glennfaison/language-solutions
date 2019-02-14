@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { asyncActionMiddleware/*, localStorageMiddleware*/ } from './middleware';
 import rootReducer from './reducers';
 
-import { routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 export const history = createHistory();
@@ -24,8 +24,8 @@ const getMiddleware = () => {
     return applyMiddleware(
       myRouterMiddleware,
       asyncActionMiddleware/*,
-      createLogger,
-      localStorageMiddleware()*/
+      createLogger(),
+      localStorageMiddleware*/
     );
   }
 };

@@ -1,6 +1,7 @@
 import {
   ActionTypes,
   copyQuote,
+  newQuote as createQuote,
   newQuoteSection,
   copyQuoteSection,
   copyQuoteSectionItem
@@ -16,19 +17,23 @@ const quoteInFocus = (state = DefaultState, action) => {
   let sectionIndex, sectionItemIndex, section, sectionItem, newQuote;
   switch (type) {
     case ActionTypes.GetNewQuote:
-      return { waiting: false, data: newQuote() };
+      return { waiting: false, data: createQuote() };
+
+    case ActionTypes.SetQuote:
+      newQuote = copyQuote(action.payload.quote);
+      return { waiting: false, data: newQuote };
 
 
 
     case ActionTypes.AddQuoteSection:
-      newQuote = copyQuote(state);
+      newQuote = copyQuote(state.data);
       newQuote.quoteSections.push(newQuoteSection());
       return { waiting: false, data: newQuote };
 
 
 
     case ActionTypes.RemoveQuoteSection:
-      newQuote = copyQuote(state);
+      newQuote = copyQuote(state.data);
       sectionIndex = action.payload.sectionIndex;
       newQuote.quoteSections.splice(sectionIndex, 1);
       return { waiting: false, data: newQuote };
@@ -36,7 +41,7 @@ const quoteInFocus = (state = DefaultState, action) => {
 
 
     case ActionTypes.SetQuoteSection:
-      newQuote = copyQuote(state);
+      newQuote = copyQuote(state.data);
       sectionIndex = action.payload.sectionIndex;
       section = action.payload.section;
       newQuote.quoteSections[sectionIndex] = copyQuoteSection(section);
@@ -45,7 +50,7 @@ const quoteInFocus = (state = DefaultState, action) => {
 
 
     case ActionTypes.AddQuoteSectionItem:
-      newQuote = copyQuote(state);
+      newQuote = copyQuote(state.data);
       sectionIndex = action.payload.sectionIndex;
       newQuote.quoteSections[sectionIndex].items.push(newQuoteSection());
       return { waiting: false, data: newQuote };
@@ -53,7 +58,7 @@ const quoteInFocus = (state = DefaultState, action) => {
 
 
     case ActionTypes.RemoveQuoteSectionItem:
-      newQuote = copyQuote(state);
+      newQuote = copyQuote(state.data);
       sectionIndex = action.payload.sectionIndex;
       sectionItemIndex = action.payload.sectionItemIndex;
       newQuote.quoteSections[sectionIndex].items.splice(sectionItemIndex, 1);
@@ -62,7 +67,7 @@ const quoteInFocus = (state = DefaultState, action) => {
 
 
     case ActionTypes.SetQuoteSectionItem:
-      newQuote = copyQuote(state);
+      newQuote = copyQuote(state.data);
       sectionIndex = action.payload.sectionIndex;
       sectionItemIndex = action.payload.sectionItemIndex;
       sectionItem = action.payload.sectionItem;

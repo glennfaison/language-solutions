@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
 import QuoteSection from './QuoteSection';
-
 import './index.css';
+import { addQuoteSection } from '../../../store/actions';
 
 
 class QuoteBody extends React.Component {
   renderSections() {
-    if (!this.props.quote.quoteSections) { return; }
-    return this.props.quote.quoteSections
+    if (this.props.quote.data.quoteSections.length === 0) { return; }
+    return this.props.quote.data.quoteSections
       .map((section, index) =>
         <QuoteSection section={section} key={index.toString()} index={index} />);
   }
   render() {
-    const { t } = this.props;
+    const { t, addQuoteSection } = this.props;
     return (
       <div className="row no-gutters">
         {this.renderSections()}
@@ -23,7 +23,7 @@ class QuoteBody extends React.Component {
           <div className="col-md-6">
             <div className="form-group">
               <button className="btn btn-link"
-                onClick={this.props.addQuoteSection}>
+                onClick={addQuoteSection()}>
                 {t('Add Section')}
               </button>
             </div>
@@ -42,11 +42,10 @@ class QuoteBody extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  "thisUser": state.thisUser
+  thisUser: state.thisUser
 });
-const mapDispatchToProps = (dispatch, ownProps) => ({ dispatch: dispatch });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(mapStateToProps, { addQuoteSection })(
   withNamespaces('src')(QuoteBody)
 );
 

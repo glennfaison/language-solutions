@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withNamespaces } from 'react-i18next';
 
 let LetterHead = (props) => {
   return (
@@ -13,4 +15,11 @@ let LetterHead = (props) => {
   );
 };
 
-export default LetterHead;
+
+const mapStateToProps = (state, ownProps) => ({
+  thisUser: state.thisUser
+});
+
+export default withNamespaces('src/components/LetterHead')(
+  connect(mapStateToProps, null)(LetterHead)
+);
