@@ -1,7 +1,7 @@
 
 export function newQuote() {
   return {
-    dateCreated: Date.now(),
+    dateCreated: null,
     code: null,
     event: null,
     venue: null,
@@ -20,12 +20,36 @@ export function newQuote() {
 export function copyQuote(old) {
   let { totalPrice, quoteSections, ...otherSectionKeys } = old;
   let _new = newQuote();
-  _new.items = quoteSections.map(value => copyQuoteSection(value));
+  _new.quoteSections = quoteSections.map(value => copyQuoteSection(value));
   for (let key in otherSectionKeys) {
     _new[key] = otherSectionKeys[key];
   }
   return _new;
 };
+
+export function quotesAreEqual(first, second) {
+  if ((first === null && second === null) || (first === undefined && second === undefined)) {
+    return true;
+  }
+  else if (!first || !second) {
+    return false;
+  }
+  let { totalPrice, quoteSections, ...otherSectionItemKeys } = first;
+  for (let key in otherSectionItemKeys) {
+    if (second[key] !== otherSectionItemKeys[key]) {
+      return false;
+    }
+  }
+  if(quoteSections.length !== second.quoteSections.length) {
+    return false;
+  }
+  if (!quoteSections.some((item, i) => quoteSectionsAreEqual(item, second.quoteSections[i]))) {
+    return false;
+  }
+  return true;
+};
+
+
 
 export function newQuoteSection() {
   return {
@@ -51,6 +75,22 @@ export function copyQuoteSection(old) {
   return _new;
 };
 
+export function quoteSectionsAreEqual(first, second) {
+  let { totalPrice, items, ...otherSectionItemKeys } = first;
+  for (let key in otherSectionItemKeys) {
+    if (second[key] !== otherSectionItemKeys[key]) {
+      return false;
+    }
+  }
+  if(items.length !== second.items.length) { return false; }
+  if (!items.some((item, i) => quoteSectionItemsAreEqual(item, second.items[i]))) {
+    return false;
+  }
+  return true;
+};
+
+
+
 export function newQuoteSectionItem() {
   return {
     description: null,
@@ -73,6 +113,16 @@ export function copyQuoteSectionItem(old) {
     _new[key] = otherSectionItemKeys[key];
   }
   return _new;
+};
+
+export function quoteSectionItemsAreEqual(first, second) {
+  let { totalPrice, ...otherSectionItemKeys } = first;
+  for (let key in otherSectionItemKeys) {
+    if (second[key] !== otherSectionItemKeys[key]) {
+      return false;
+    }
+  }
+  return true;
 };
 
 // let isSpaceOrEmpty = (str) => {

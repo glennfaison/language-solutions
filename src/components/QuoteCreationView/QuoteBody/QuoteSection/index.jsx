@@ -6,18 +6,17 @@ import { withNamespaces } from 'react-i18next';
 import QuoteSectionItem from "./QuoteSectionItem";
 import InputContainer from '../../../InputContainer';
 import { removeQuoteSection, addQuoteSectionItem, setQuoteSection } from '../../../../store/actions';
+import { newQuoteSection } from '../../../../constants';
 
 
 class QuoteSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.section;
-    // console.log("state", this.state);
-    // console.log("props", props);
-    // for (let key in this.state) {
-    //   if (key === "totalPrice") { continue; }
-    //   this.state[key] = this.props.item[key];
-    // }
+    this.state = newQuoteSection();console.log(this.state);
+    for (let key in this.state) {
+      if (key === "totalPrice") { continue; }
+      this.state[key] = this.props.section[key];
+    }
     this.editSectionItem = this.editSection.bind(this);
     this.saveStateToQuote = this.saveStateToQuote.bind(this);
   }

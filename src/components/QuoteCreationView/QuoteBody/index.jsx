@@ -23,7 +23,7 @@ class QuoteBody extends React.Component {
           <div className="col-md-6">
             <div className="form-group">
               <button className="btn btn-link"
-                onClick={addQuoteSection()}>
+                onClick={() => addQuoteSection()}>
                 {t('Add Section')}
               </button>
             </div>

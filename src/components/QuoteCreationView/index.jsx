@@ -18,8 +18,6 @@ class QuoteCreationView extends React.Component {
   }
   render() {
     const { quoteInFocus } = this.props;
-    console.log("Mounting Page")
-    console.log(quoteInFocus)
     return (
       <div className="container-fluid p-0">
         {

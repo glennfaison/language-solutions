@@ -4,7 +4,8 @@ import {
   newQuote as createQuote,
   newQuoteSection,
   copyQuoteSection,
-  copyQuoteSectionItem
+  copyQuoteSectionItem,
+  quotesAreEqual
 } from "../../constants";
 
 const DefaultState = {
@@ -17,6 +18,7 @@ const quoteInFocus = (state = DefaultState, action) => {
   let sectionIndex, sectionItemIndex, section, sectionItem, newQuote;
   switch (type) {
     case ActionTypes.GetNewQuote:
+      console.log(quotesAreEqual(state.data, createQuote()));
       return { waiting: false, data: createQuote() };
 
     case ActionTypes.SetQuote:

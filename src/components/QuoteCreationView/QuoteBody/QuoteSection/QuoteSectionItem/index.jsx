@@ -8,7 +8,7 @@ import { newQuoteSectionItem } from '../../../../../constants';
 class QuoteSectionItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = newQuoteSectionItem(); console.log(this.state)
+    this.state = newQuoteSectionItem();
     for (let key in this.state) {
       if (key === "totalPrice") { continue; }
       this.state[key] = this.props.item[key];
