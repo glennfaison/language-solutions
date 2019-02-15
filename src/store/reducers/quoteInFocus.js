@@ -4,8 +4,7 @@ import {
   newQuote as createQuote,
   newQuoteSection,
   copyQuoteSection,
-  copyQuoteSectionItem,
-  quotesAreEqual
+  copyQuoteSectionItem
 } from "../../constants";
 
 const DefaultState = {
@@ -18,7 +17,6 @@ const quoteInFocus = (state = DefaultState, action) => {
   let sectionIndex, sectionItemIndex, section, sectionItem, newQuote;
   switch (type) {
     case ActionTypes.GetNewQuote:
-      console.log(quotesAreEqual(state.data, createQuote()));
       return { waiting: false, data: createQuote() };
 
     case ActionTypes.SetQuote:
@@ -73,7 +71,7 @@ const quoteInFocus = (state = DefaultState, action) => {
       sectionIndex = action.payload.sectionIndex;
       sectionItemIndex = action.payload.sectionItemIndex;
       sectionItem = action.payload.sectionItem;
-      newQuote.quoteSections[sectionIndex].items.push(copyQuoteSectionItem(sectionItem));
+      newQuote.quoteSections[sectionIndex].items[sectionItemIndex] = copyQuoteSectionItem(sectionItem);
       return { waiting: false, data: newQuote };
 
 

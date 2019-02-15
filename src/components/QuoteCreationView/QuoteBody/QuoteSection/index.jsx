@@ -5,32 +5,31 @@ import { withNamespaces } from 'react-i18next';
 
 import QuoteSectionItem from "./QuoteSectionItem";
 import InputContainer from '../../../InputContainer';
-import { removeQuoteSection, addQuoteSectionItem, setQuoteSection } from '../../../../store/actions';
-import { newQuoteSection } from '../../../../constants';
+import {
+  addQuoteSectionItem,
+  removeQuoteSection,
+  setQuoteSection
+} from '../../../../store/actions';
 
 
 class QuoteSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = newQuoteSection();console.log(this.state);
-    for (let key in this.state) {
-      if (key === "totalPrice") { continue; }
-      this.state[key] = this.props.section[key];
-    }
+    this.state = props.section;
     this.editSectionItem = this.editSection.bind(this);
     this.saveStateToQuote = this.saveStateToQuote.bind(this);
   }
   editSection() {
-    let { sectionIndex } = this.props;
-    this.props.setQuoteSection(sectionIndex, this.state);
+    let { index, setQuoteSection } = this.props;
+    setQuoteSection(index, this.state);
   }
   saveStateToQuote(key, value) {
     this.setState({ [key]: value });
-    let total = this.state.items.reduce((prevValue, currValue) => {
-      return prevValue.totalPrice + currValue.totalPrice;
-    }, 0);
+    // let total = this.state.items.reduce((prevValue, currValue) => {
+    //   return prevValue.totalPrice + currValue.totalPrice;
+    // }, 0);
     // let total = this.state.unitPrice * this.state.timeUnits;
-    this.setState({ totalPrice: total });
+    // this.setState({ totalPrice: total });
     this.editSection();
   }
   setUITotalPrice() {
@@ -41,7 +40,7 @@ class QuoteSection extends React.Component {
     this.setUITotalPrice();
   }
   render() {
-    const { t, index, section } = this.props;
+    const { t, index, section, addQuoteSectionItem, removeQuoteSection, setQuoteSection } = this.props;
     return (
       <div className="container-fluid p-0 pt-4 mt-3 alert-light">
         <div className="form-group alert-secondary position-relative">
@@ -82,7 +81,6 @@ class QuoteSection extends React.Component {
     if (!items) { return; }
     return items.map((item, index) =>
       <QuoteSectionItem
-        item={item}
         key={index.toString()}
         index={index}
         sectionIndex={this.props.index}
@@ -92,12 +90,14 @@ class QuoteSection extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  thisUser: state.thisUser
+  thisUser: state.thisUser,
+  section: state.quoteInFocus.data.quoteSections[ownProps.index]
 });
 
 export default withNamespaces('src')(
   connect(mapStateToProps, {
     addQuoteSectionItem,
-    removeQuoteSection
+    removeQuoteSection,
+    setQuoteSection
   })(QuoteSection)
 );

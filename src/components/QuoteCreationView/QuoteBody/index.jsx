@@ -12,7 +12,7 @@ class QuoteBody extends React.Component {
     if (this.props.quote.data.quoteSections.length === 0) { return; }
     return this.props.quote.data.quoteSections
       .map((section, index) =>
-        <QuoteSection section={section} key={index.toString()} index={index} />);
+        <QuoteSection key={index.toString()} index={index} />);
   }
   render() {
     const { t, addQuoteSection } = this.props;
@@ -32,7 +32,7 @@ class QuoteBody extends React.Component {
             <div className="form-group row no-gutters">
               <label className="col-4 pl-3">{t('Quote Total')}</label>
               <input type="number" disabled className="form-control form-control-sm col-8"
-                defaultValue={this.props.quote.totalPrice} />
+                value={this.props.quote.totalPrice} />
             </div>
           </div>
         </div>

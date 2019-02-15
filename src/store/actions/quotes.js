@@ -87,10 +87,10 @@ export const removeQuoteSectionItem = (sectionIndex, sectionItemIndex) => dispat
 
 export const setQuoteSectionItem = (sectionIndex, sectionItemIndex, sectionItem) => dispatch => {
   dispatch({
-    type: ActionTypes.SetQuoteSection,
+    type: ActionTypes.SetQuoteSectionItem,
     payload: {
       sectionIndex: sectionIndex, sectionItemIndex: sectionItemIndex,
-      quoteSectionItem: sectionItem
+      sectionItem: sectionItem
     }
   });
 };
